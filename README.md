@@ -6,7 +6,7 @@
 1) run server mongo
 
 2) run 
-npm update
+npm install
 
 3) run seeds: 
 npm run seed
