@@ -1,0 +1,11 @@
+.align-center
+	text-align: center
+
+@media all and (max-width: 1024px)
+	.ui .grid > .row
+		-ms-flex-wrap: wrap-reverse !important
+		flex-wrap: wrap-reverse !important
+
+		>.column
+			&:last-child
+				padding-bottom: 2rem
