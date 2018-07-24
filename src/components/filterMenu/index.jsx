@@ -51,10 +51,6 @@ const Filter = ( {filterBy, setFilterOrder, filterOrder, setFilterSearch, search
 							onClick={setFilterOrder.bind(this, 'lastName')}>
 							<Icon name={filterOrder.lastName ? 'arrow up' : 'arrow down'} />Фамилия
 						</Menu.Item>
-						<Menu.Item>
-							<Input icon='search' placeholder='Search user...' value={searchQuery}
-								onChange={( {target: {value}} ) => setFilterSearch(value)} />
-						</Menu.Item>
 					</Menu.Menu>
 					<Menu.Item>
 						<Menu.Header>Поиск</Menu.Header>
