@@ -9,25 +9,25 @@ import * as usersActions from '../actions/user';
 import UsersPage from '../pages/users';
 
 const searchFilter = ( users, filterBy, filterOrder, searchQuery, isGroup ) => {
-	users = _filterBy(users, o => o.firstName.toLowerCase().includes(searchQuery.toLowerCase()) || o.lastName.toLowerCase().includes(searchQuery.toLowerCase()));
+	let filteredUsers = _filterBy(users, o => o.firstName.toLowerCase().includes(searchQuery.toLowerCase()) || o.lastName.toLowerCase().includes(searchQuery.toLowerCase()));
 
 	const order = filterOrder[filterBy] ? 'desc' : 'ask';
 	switch ( filterBy ) {
 		case 'firstName':
-			users = _orderBy(users, 'firstName', order);
+			filteredUsers = _orderBy(filteredUsers, 'firstName', order);
 			break;
 		case 'lastName':
-			users = _orderBy(users, 'lastName', order);
+			filteredUsers = _orderBy(filteredUsers, 'lastName', order);
 			break;
 		default:
 			break;
 	}
 
 	if( isGroup ) {
-		users = _groupBy(users, 'group');
+		filteredUsers = _groupBy(filteredUsers, 'group');
 	}
 
-	return users;
+	return filteredUsers;
 };
 
 const mapStateToProps = ( {users, filter, group} ) => ({
