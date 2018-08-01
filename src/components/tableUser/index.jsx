@@ -1,22 +1,23 @@
 import React from 'react';
 import {Table} from 'semantic-ui-react';
 import _map from 'lodash/map';
-import _find from 'lodash/find';
 
 import TableRow from '../tableRow';
 
-const MyTable = ({data, isLoaded, title, isGroup, groups, currentGroup}) => {
+const MyTable = ({data, isLoaded, title, isGroup}) => {
+
+	let colspan = 3;
 
 	if (title === undefined) {
-		const group = _find(groups, o => o._id === currentGroup);
-		title = group ? group.title : 'Без группы';
+		title = data[0].group ? data[0].group.title : 'Без группы';
+		colspan = 2;
 	}
 
 	return (
-		<Table celled striped>
+		<Table striped>
 			<Table.Header>
 				<Table.Row>
-					<Table.HeaderCell colSpan='3'>{title}</Table.HeaderCell>
+					<Table.HeaderCell colSpan={colspan}>{title}</Table.HeaderCell>
 				</Table.Row>
 			</Table.Header>
 
@@ -25,7 +26,7 @@ const MyTable = ({data, isLoaded, title, isGroup, groups, currentGroup}) => {
 					isLoaded
 						&& _map(data, user => (
 							<TableRow
-								key={user.id}
+								key={user._id}
 								isGroup={isGroup}
 								{...user}
 							/>

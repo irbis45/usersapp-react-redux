@@ -24,17 +24,16 @@ const searchFilter = ( users, filterBy, filterOrder, searchQuery, isGroup ) => {
 	}
 
 	if( isGroup ) {
-		filteredUsers = _groupBy(filteredUsers, 'group');
+		filteredUsers = _groupBy(filteredUsers, 'group.title');
 	}
 
 	return filteredUsers;
 };
 
-const mapStateToProps = ( {users, filter, group} ) => ({
+const mapStateToProps = ( {users, filter} ) => ({
 	users   : searchFilter(users.users, filter.filterBy, filter.filterOrder, filter.searchQuery, filter.isGroup),
 	isLoaded: users.isLoaded,
-	isGroup : filter.isGroup,
-	groups  : group.items,
+	isGroup : filter.isGroup
 });
 
 const mapDispatchToProps = dispatch => ({

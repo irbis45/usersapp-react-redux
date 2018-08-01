@@ -3,15 +3,15 @@ import axios from 'axios';
 import { apiPrefix } from '../../config/config.json';
 
 export default {
-	listUsers() {
-		return axios.get(`${apiPrefix}/get_list`);
+	getUsers() {
+		return axios.get(`${apiPrefix}/get_users`);
 	},
 
 	addUser(data) {
-		return axios.post(`${apiPrefix}/add_user_get`, data);
+		return axios.post(`${apiPrefix}/add_user`, data);
 	},
 
-	listGroups() {
+	getGroups() {
 		return axios.get(`${apiPrefix}/get_groups`);
 	},
 }

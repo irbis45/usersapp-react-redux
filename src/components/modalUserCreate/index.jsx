@@ -37,8 +37,8 @@ class ModalForm extends PureComponent {
 		};
 	}
 
-	componentWillMount() {
-		api.listGroups()
+	componentDidMount() {
+		api.getGroups()
 			.then(( {data} ) => {
 				this.props.getGroups(data);
 			})
@@ -51,18 +51,18 @@ class ModalForm extends PureComponent {
 			lastName : this.state.form.lastName,
 			group    : this.state.form.group,
 		})
-			.then(( {data} ) => {
-				this.props.addNewUser({
-					id        : data.user.id,
-					firstName : data.user.firstName,
-					lastName  : data.user.lastName,
-					group     : data.user.group || 0,
-					groupTitle: data.user.groupTitle || ''
-				});
-				this.formSendStateUpd(data.msg, true);
+			.then(() => {
+				api.getUsers()
+					.then(( {data} ) => {
+						this.props.getUsers(data);
+					})
+					.catch(err => console.log(err)
+					);
+
+				this.formSendStateUpd('Пользователь успешно добавлен!', true);
 			})
 			.catch(err => {
-				this.formSendStateUpd({error: `: ${err.response.statusText}`}, false);
+				this.formSendStateUpd({error: `: ${err.response}`}, false);
 			});
 	};
 
@@ -94,7 +94,7 @@ class ModalForm extends PureComponent {
 			form    : {
 				firstName: '',
 				lastName : '',
-				group    : ''
+				groupTitle    : ''
 			},
 			valid   : {
 				formErrors    : {
@@ -170,14 +170,14 @@ class ModalForm extends PureComponent {
 		const {groups, isLoaded} = this.props;
 
 		let groupsItem = [
-			{key: 'no_groups', text: 'Без группы', value: '-'},
+			{key: 'no_groups', text: 'Без группы', value: ''},
 		];
 
 		isLoaded && groups.map(group => (
 			groupsItem.push({
-				key  : group._id,
-				text : group.title,
-				value: group._id,
+				key  : Date.now() + Math.random().toString(36).substr(2, 16),
+				text : group,
+				value: group,
 			})
 		));
 

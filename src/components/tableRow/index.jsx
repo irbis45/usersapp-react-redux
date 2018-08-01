@@ -3,7 +3,7 @@ import {Table} from 'semantic-ui-react';
 
 const Row = ( user ) => {
 
-	const {firstName, lastName, groupTitle, isGroup} = user;
+	const {firstName, lastName, group, isGroup} = user;
 
 	return (
 		<Table.Row>
@@ -16,7 +16,7 @@ const Row = ( user ) => {
 			{
 				!isGroup
 				&&
-				<Table.Cell collapsing>Группа: {groupTitle || 'отсутствует'}</Table.Cell>
+				<Table.Cell collapsing>Группа: {group ? group.title : 'отсутствует'}</Table.Cell>
 			}
 
 		</Table.Row>

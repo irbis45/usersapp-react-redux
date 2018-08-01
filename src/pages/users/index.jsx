@@ -31,16 +31,16 @@ class Users extends Component {
 
 	componentWillMount() {
 		this.updateDimensions();
+	}
 
-		api.listUsers()
+	componentDidMount() {
+		api.getUsers()
 			.then(( {data} ) => {
 				this.props.getUsers(data);
 			})
 			.catch(err => console.log(err)
 			);
-	}
 
-	componentDidMount() {
 		window.addEventListener('resize', this.updateDimensions);
 	}
 
@@ -63,7 +63,8 @@ class Users extends Component {
 	};
 
 	render() {
-		const {users, isLoaded, isGroup, groups} = this.props;
+		const {users, isLoaded, isGroup} = this.props;
+
 		return [
 			<HeaderMenu key='header' />,
 			<div className='container' key='content'>
@@ -76,7 +77,7 @@ class Users extends Component {
 									isGroup
 										?
 										_map(users, ( group, key ) => (
-											<UserTable key={key} data={group} isLoaded={isLoaded} isGroup={isGroup} groups={groups} currentGroup={key} />
+											<UserTable key={key} data={group} isLoaded={isLoaded} isGroup={isGroup} />
 										))
 										:
 										<UserTable data={users} isLoaded={isLoaded} title='Users' isGroup={isGroup} />

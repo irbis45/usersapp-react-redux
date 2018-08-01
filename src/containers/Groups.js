@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import Modal from '../components/modalUserCreate'
 import {bindActionCreators} from 'redux';
 import * as groupActions from '../actions/group';
+import * as userActions from '../actions/user';
 
 const mapStateToProps = ( {group} ) => ({
 	groups  : group.items,
@@ -11,6 +12,7 @@ const mapStateToProps = ( {group} ) => ({
 
 const mapDispatchToProps = dispatch => ({
 	...bindActionCreators(groupActions, dispatch),
+	...bindActionCreators(userActions, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Modal);

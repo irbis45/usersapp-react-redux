@@ -18,4 +18,4 @@ public/build
 .env.production.local
 
 *.log
-
+.env
