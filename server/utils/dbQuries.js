@@ -30,7 +30,7 @@ export function getGroups() {
 			uniqueGroup.forEach((itm) => {
 				itm.group.title && result.push(itm.group.title);
 			});
-			console.log(result);
+
 			resolve(result);
 		});
 	});
